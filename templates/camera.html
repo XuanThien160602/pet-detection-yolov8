@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nhận diện từ camera</title>
+  <style>
+    .body {
+      
+      background-color: #2D3748;
+    }
+    .body h2 {
+      width: 500px;
+      height: 40px;
+      background-color: #4A5568;
+      border-radius: 10px;
+      color: #E2E8F0;
+    }
+    
+    .body-form {
+      border-radius: 20px;
+
+    }
+
+    .back-button {
+      width: 180px;
+      height: 20px;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+    }
+
+    .body-button {
+      height: auto;
+      width: auto;
+      color: black;
+      text-decoration: none;
+    }
+
+    .container {
+      display: flex;
+      gap: 20px;
+      margin-top: 5px;
+      align-items: flex-start;
+            /* background-color: #2D3748; */
+
+    }
+    .camera-box {
+      flex: 7; /* 70% */
+      border: 2px solid gray;
+      height: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: white;
+    }
+    .camera-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .info-box {
+      flex: 3; /* 30% */
+      padding: 15px;
+      border: 2px solid #007bff;
+      border-radius: 8px;
+      background-color: #f8f9fa;
+      max-height: 480px;
+      overflow-y: auto;
+    }
+    .info-box h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: #007bff;
+    }
+  </style>
+</head>
+<body class="body">
+  
+    <h2>📷 Nhận diện vật nuôi trực tiếp qua camera</h2>
+
+  <form method="POST" class="body-form">
+    {% if camera_on %}
+      <button type="submit" name="action" value="stop">🔴 Tắt Camera</button>
+    {% else %}
+      <button type="submit" name="action" value="start">🟢 Bật Camera</button>
+    {% endif %}
+  </form>
+
+  <div class="container">
+    <div class="camera-box">
+      {% if camera_on %}
+        <img src="/video_feed">
+      {% else %}
+        <p>📴 Camera đang tắt</p>
+      {% endif %}
+    </div>
+
+    <!-- Box hiển thị kết quả nhận diện -->
+    <div class="info-box">
+      <h3>📋 Thông tin nhận diện</h3>
+      <div id="counts-box">
+        <p>Chưa có dữ liệu nhận diện</p>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <div class="back-button">
+      <a href="/" class="body-button">⬅ Quay lại trang chính</a>
+
+  </div>
+
+  
+  
+  <script>
+    function updateCounts() {
+      fetch("/counts")
+        .then(res => res.json())
+        .then(data => {
+          const box = document.getElementById("counts-box");
+          if (Object.keys(data).length === 0) {
+            box.innerHTML = "<p>Chưa có dữ liệu nhận diện</p>";
+          } else {
+            let html = "<ul>";
+            for (let label in data) {
+              html += `<li>${label}: ${data[label]}</li>`;
+            }
+            html += "</ul>";
+            box.innerHTML = html; 
+          }
+        })
+        .catch(err => console.error("Lỗi khi fetch /counts:", err));
+    }
+
+    // Cập nhật box mỗi 1 giây
+    setInterval(updateCounts, 1000);
+  </script>
+</body>
+</html>

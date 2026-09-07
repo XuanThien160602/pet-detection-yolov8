@@ -1,0 +1,11 @@
+venv/
+__pycache__/
+*.pyc
+
+runs/
+dataset/
+
+uploads/
+outputs/
+
+.vscode/

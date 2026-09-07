@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kết quả nhận diện</title>
+  <style>
+    .body {
+      
+      background-color: #2D3748;
+    }
+
+    .body h2 {
+      width: 500px;
+      height: 40px;
+      background-color: #4A5568;
+      border-radius: 10px;
+      color: #E2E8F0;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 30px;
+      margin-top: 20px;
+      background-color: #4A5568;
+    }
+    .image-box {
+      text-align: center;
+    }
+
+    .image-box h3 {
+      color: white;
+    }
+    .image-box img {
+      max-width: 600px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+    }
+    .back-button {
+      width: 180px;
+      height: 20px;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+    }
+
+    .body-button {
+      height: auto;
+      width: auto;
+      color: black;
+      text-decoration: none;
+    }
+
+    .info-box {
+      margin-top: 10px;
+      background-color: whitesmoke;
+      width: 300px;
+      border-radius: 10px;
+      padding: 5px; 
+    }
+  </style>
+</head>
+<body class="body">
+  <h2>🔍 Kết quả nhận diện</h2>
+<!-- <div>
+    <h3>Ảnh gốc:</h3>
+  <img src="{{ url_for('static', filename='uploads/' + original_file) }}" width="400"><br><br>
+
+  <h3>Ảnh đã nhận diện:</h3>
+  <img src="{{ url_for('static', filename='outputs/' + result_file) }}" width="400"><br><br>
+</div> -->
+<div class="container">
+    <div class="image-box">
+      <h3>Ảnh gốc</h3>
+      <img src="{{ url_for('static', filename='uploads/' + original_file) }}" width="1000">
+    </div>
+
+    <div class="image-box">
+      <h3>Ảnh đã nhận diện</h3>
+      <img src="{{ url_for('static', filename='outputs/' + result_file) }}" width="1000">
+    </div>
+  </div>
+  <div class="info-box">
+    <h3>📋 Thông tin nhận diện</h3>
+    <ul>
+      {% for label, count in counts.items() %}
+        <li>{{ label }}: {{ count }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <br>
+  <!-- <a href="/image">⬅ Quay lại trang upload</a> -->
+   <div class="back-button">
+      <a href="/" class="body-button">⬅ Quay lại trang upload</a>
+
+  </div>
+</body>
+</html>
