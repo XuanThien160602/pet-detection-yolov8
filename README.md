@@ -115,16 +115,22 @@ python app.py
 
 Sau đó mở trình duyệt: http://127.0.0.1:5000
 
-## Giao diện 
+## Giao diện ứng dụng
+
 Giao diện chính:
+
 <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/38cb662c-d2cb-4915-ac88-06e562e8b3b3" />
 Chức năng nhận diện ảnh:
+
 <img width="1364" height="713" alt="image" src="https://github.com/user-attachments/assets/9dd7f4eb-d4be-427e-9083-bb53903b4211" />
 Kết quả nhận diện:
+
 <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/993afeec-ef50-4782-94e4-9739e1de9e71" />
 Chức năng nhận diện camera:
+
 <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/6de5e999-91b3-4456-ba4c-3de7479e9e79" />
-Kết quả nhận diện camera
+Kết quả nhận diện camera:
+
 <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/ffc9d17c-351f-42b9-94ee-5bd01345cd06" />
 
 
