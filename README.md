@@ -33,53 +33,7 @@ Người dùng có thể:
 - Hiển thị kết quả nhận diện trực tiếp.
 - Thống kê số lượng vật nuôi đang được phát hiện.
 - Tắt camera khi không sử dụng.
-
 ---
-
-## Kiến trúc hệ thống
-Hệ thống gồm các thành phần chính:
-
-┌───────────────┐
-
-│      Người dùng     │
-
-│    (Client)   │
-
-└───────┬───────┘
-
-        │
-        
-        │ HTTP Request
-        
-        ▼
-        
-┌─────────────────────┐
-
-│   Web Application   │
-
-│   Flask / HTML      │
-
-└─────────┬───────────┘
-
-          │
-          
-          │ Image / Video Frame
-          ▼
-┌─────────────────────┐
-│      YOLOv8         │
-│   Object Detection  │
-│      best.pt        │
-└─────────┬───────────┘
-          │
-          │ Detection Result
-          ▼
-┌─────────────────────┐
-│     Flask Web App   │
-│ Bounding Box        │
-│ Label + Confidence  │
-│ Animal Count        │
-└─────────────────────┘
-
 ## Công nghệ sử dụng
 | Công nghệ   | Vai trò                        |
 | ----------- | ------------------------------ |
@@ -93,5 +47,85 @@ Hệ thống gồm các thành phần chính:
 | Git/GitHub  | Quản lý mã nguồn               |
 | Render      | Deploy ứng dụng web            |
 
+## Quy trình nhận diện ảnh
+Người dùng chọn ảnh
+        ->
+Upload ảnh
+        ->
+Flask nhận file
+        ->
+YOLOv8 xử lý ảnh
+        ->
+Phát hiện vật nuôi
+        ->
+Lấy Label + Bounding Box + Confidence
+        ->
+Đếm số lượng vật nuôi
+        ->
+OpenCV vẽ kết quả
+        ->
+Hiển thị ảnh kết quả
 
+## Quy trình nhận diện camera
+Bật camera
+    ->
+OpenCV lấy frame
+    ->
+YOLOv8 xử lý frame
+    ->
+Phát hiện vật nuôi
+    ->
+Vẽ Bounding Box
+    ->
+Cập nhật số lượng
+    ->
+Hiển thị frame lên trình duyệt
+
+Khi người dùng tắt camera, hệ thống giải phóng camera bằng OpenCV và hiển thị trạng thái camera đang tắt.
+
+## Kết quả nhận diện
+
+- Tên vật nuôi
+- Bounding Box
+- Confidence Score
+- Số lượng
+
+## Cài đặt và chạy chương trình
+1. Clone project
+
+git clone https://github.com/XuanThien160602/pet-detection-yolov8.git
+
+Di chuyển vào thư mục project: cd pet-detection-yolov8
+
+2. Tạo môi trường ảo
+
+python -m venv venv
+
+3. Kích hoạt môi trường ảo trên Windows
+
+venv\Scripts\Activate.ps1
+
+4. Cài đặt thư viện
+
+pip install -r requirements.txt
+
+5. Chạy ứng dụng
+
+python app.py
+
+Sau đó mở trình duyệt: http://127.0.0.1:5000
+
+## Giao diện 
+Giao diện chính:
 <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/38cb662c-d2cb-4915-ac88-06e562e8b3b3" />
+Chức năng nhận diện ảnh:
+<img width="1364" height="713" alt="image" src="https://github.com/user-attachments/assets/9dd7f4eb-d4be-427e-9083-bb53903b4211" />
+Kết quả nhận diện:
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/993afeec-ef50-4782-94e4-9739e1de9e71" />
+Chức năng nhận diện camera:
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/6de5e999-91b3-4456-ba4c-3de7479e9e79" />
+Kết quả nhận diện camera
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/ffc9d17c-351f-42b9-94ee-5bd01345cd06" />
+
+
+
