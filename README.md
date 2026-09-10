@@ -36,7 +36,62 @@ Người dùng có thể:
 
 ---
 
-## Mô hình AI
+## Kiến trúc hệ thống
+Hệ thống gồm các thành phần chính:
 
-Dự án sử dụng YOLOv8 của Ultralytics cho bài toán Object Detection.
-Mô hình được sử dụng trong ứng dụng là: runs/detect/train2/weights/best.pt
+┌───────────────┐
+
+│      Người dùng     │
+
+│    (Client)   │
+
+└───────┬───────┘
+
+        │
+        
+        │ HTTP Request
+        
+        ▼
+        
+┌─────────────────────┐
+
+│   Web Application   │
+
+│   Flask / HTML      │
+
+└─────────┬───────────┘
+
+          │
+          
+          │ Image / Video Frame
+          ▼
+┌─────────────────────┐
+│      YOLOv8         │
+│   Object Detection  │
+│      best.pt        │
+└─────────┬───────────┘
+          │
+          │ Detection Result
+          ▼
+┌─────────────────────┐
+│     Flask Web App   │
+│ Bounding Box        │
+│ Label + Confidence  │
+│ Animal Count        │
+└─────────────────────┘
+
+## Công nghệ sử dụng
+| Công nghệ   | Vai trò                        |
+| ----------- | ------------------------------ |
+| Python      | Ngôn ngữ lập trình chính       |
+| Flask       | Xây dựng backend và web server |
+| YOLOv8      | Nhận diện vật nuôi             |
+| Ultralytics | Thư viện triển khai YOLOv8     |
+| OpenCV      | Xử lý hình ảnh và camera       |
+| HTML/CSS    | Xây dựng giao diện             |
+| NumPy       | Xử lý dữ liệu hình ảnh         |
+| Git/GitHub  | Quản lý mã nguồn               |
+| Render      | Deploy ứng dụng web            |
+
+
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/38cb662c-d2cb-4915-ac88-06e562e8b3b3" />
